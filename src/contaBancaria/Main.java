@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        Map<String, ContaBancaria> contas = new HashMap<>();
+        List<ContaBancaria> contas = new ArrayList<>();
         ContaBancaria daniel = new ContaBancaria("Daniel", "1234-5");
         ContaBancaria maria = new ContaBancaria("Maria", "2345-6");
         ContaBancaria joao = new ContaCorrente("Joao", "3456-7");
@@ -16,10 +16,13 @@ public class Main {
         maria.depositar(1200);
         joao.depositar(300);
 
-        contas.put(daniel.numeroConta, daniel);
-        contas.put(maria.numeroConta, maria);
-        contas.put(joao.numeroConta, joao);
+        contas.add(daniel);
+        contas.add(maria);
+        contas.add(joao);
 
-        System.out.println(contas.get("1234-5").getTitular());
+        contas.stream()
+                .map(ContaBancaria::getSaldo)
+                .forEach(System.out::println);
+
     }
 }
